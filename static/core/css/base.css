@@ -76,3 +76,15 @@ html, body, p, div{
 .footer > div > div > ul > li{
     padding-bottom:8px;
 }
+
+.bg-dark {
+    background-color: #87CEEB !important; /* Replace with your desired dark background color */
+  }
+  
+  .bg-dark .section-header {
+    color: 	#fbecde; /* Replace with your desired text color for the section header */
+  }
+  
+  .bg-dark p {
+    color: #fbecde !important; /* Replace with your desired text color for the paragraph */
+  }
