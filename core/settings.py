@@ -19,6 +19,8 @@ INSTALLED_APPS = [
     'store',
     'basket',
     'account',
+    'payment',
+    'orders',
     
 ]
 
@@ -94,6 +96,9 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+BASKET_SESSION_ID = 'basket'
+
 
 AUTH_USER_MODEL = 'account.UserBase'
 LOGIN_REDIRECT_URL = '/account/dashboard'
