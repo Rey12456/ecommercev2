@@ -1,6 +1,8 @@
 from decimal import Decimal
 
 from store.models import Product
+from django.conf import settings
+
 
 
 class Basket():
@@ -74,6 +76,13 @@ class Basket():
             del self.basket[product_id]
             print(product_id)
             self.save()
+
+
+    def clear(self):
+        # Remove basket from session
+        del self.session['skey']
+        self.save()
+
 
     def save(self):
         self.session.modified = True

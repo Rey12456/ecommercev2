@@ -11,11 +11,15 @@ def add(request):
         user_id = request.user.id
         order_key = request.POST.get('order_key')
         baskettotal = basket.get_total_price()
+        custName=request.POST.get('custName')
+        custAdd=request.POST.get('custAdd')
+        postCode=request.POST.get('postCode')
+        
 
         if Order.objects.filter(order_key=order_key).exists():
              pass
         else:
-            order = Order.objects.create(user_id=user_id, full_name='name', address1='add1',
+            order = Order.objects.create(user_id=user_id, full_name=custName, address1=custAdd,
                                 address2='add2', total_paid=baskettotal, order_key=order_key)
             order_id = order.pk
 
