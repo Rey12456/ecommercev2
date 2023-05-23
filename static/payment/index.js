@@ -46,6 +46,9 @@ var postCode = document.getElementById("postCode").value;
       order_key: clientsecret,
       csrfmiddlewaretoken: CSRF_TOKEN,
       action: "post",
+      custName: custName,  // Include the custName value in the data object
+      custAdd: custAdd,
+      
     },
     success: function (json) {
       console.log(json.success)

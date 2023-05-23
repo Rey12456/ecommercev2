@@ -108,6 +108,25 @@
     {% comment %} Make csrf token availble in JS files {% endcomment %}
     var CSRF_TOKEN = '{{ csrf_token }}';
 </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the input field for customer name
+    var custNameInput = document.getElementById('custName');
+    var custAddInput = document.getElementById('custAdd');
+    var postCodeInput = document.getElementById("postCode");
+
+    // Store the customer name in a variable
+    var custName = custNameInput.value;
+    var custAdd = custAddInput.value;
+    var postCode = postCodeInput.value;
+
+    // Use the custName variable as needed
+    console.log('Customer Name:', custName);
+    console.log('Customer Address:', custAdd);
+  });
+</script>
+
 <script src="https://js.stripe.com/v3/"></script>
 <script src="{% static 'payment/index.js' %}" data-rel-js></script>
 
