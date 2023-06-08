@@ -1,26 +1,29 @@
-from django.shortcuts import render
 from django.http.response import JsonResponse
+from django.shortcuts import render
 
-# Create your views here.
 from basket.basket import Basket
+
 from .models import Order, OrderItem
 
+
 def add(request):
-    basket=Basket(request)
+    basket = Basket(request)
     if request.POST.get('action') == 'post':
-        user_id = request.user.id
+
         order_key = request.POST.get('order_key')
+        user_id = request.user.id
         baskettotal = basket.get_total_price()
         custName=request.POST.get('custName')
         custAdd=request.POST.get('custAdd')
         postCode=request.POST.get('postCode')
-        
+        phone=request.POST.get('phonenumber')
 
+        # Check if order exists
         if Order.objects.filter(order_key=order_key).exists():
-             pass
+            pass
         else:
             order = Order.objects.create(user_id=user_id, full_name=custName, address1=custAdd,
-                                address2='add2', total_paid=baskettotal, order_key=order_key)
+                                post_code=postCode, phone=phone, total_paid=baskettotal, order_key=order_key)
             order_id = order.pk
 
             for item in basket:

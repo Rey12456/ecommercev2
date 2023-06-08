@@ -4,10 +4,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = '3xk*)i0x#k$btl=(6q)te!19=mp6d)lm1+zl#ts4ewxi3-!vm_'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -19,13 +21,12 @@ INSTALLED_APPS = [
     'store',
     'basket',
     'account',
-    'payment',
     'orders',
-    
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -90,20 +91,31 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Basket session ID
 BASKET_SESSION_ID = 'basket'
 
+# Stripe Payment
+# PUBLISHABLE_KEY = ''
+# SECRET_KEY = ''
+# STRIPE_ENDPOINT_SECRET = ''
+# stripe listen --forward-to localhost:8000/payment/webhook/
 
+# Custom user model
 AUTH_USER_MODEL = 'account.UserBase'
 LOGIN_REDIRECT_URL = '/account/dashboard'
-LOGIN_URL='/account/login/'
+LOGIN_URL = '/account/login/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-STRIPE_ENDPOINT_SECRET='whsec_5308fa52f2f381bf9a932f5fc35fa31126ac189a0782b3d951113509719640ca'
+# Email setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'rshreyas508@gmail.com'
+EMAIL_HOST_PASSWORD = 'iedkpjgaiqtdunwz'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'rshreyas508@gmail.com'

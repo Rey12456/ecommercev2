@@ -1,5 +1,6 @@
-from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager, PermissionsMixin)
-from django.core.mail import send_mail
+from django.contrib.auth.models import (AbstractBaseUser, BaseUserManager,
+                                        PermissionsMixin)
+from django.core.mail import send_mail, EmailMessage
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_countries.fields import CountryField
@@ -28,7 +29,8 @@ class CustomAccountManager(BaseUserManager):
             raise ValueError(_('You must provide an email address'))
 
         email = self.normalize_email(email)
-        user = self.model(email=email, user_name=user_name, **other_fields)
+        user = self.model(email=email, user_name=user_name,
+                          **other_fields)
         user.set_password(password)
         user.save()
         return user
@@ -64,15 +66,14 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = "Accounts"
 
     def email_user(self, subject, message):
-        send_mail(
-            subject,
-            message,
-            '1@1.com',
-            [self.email],
-            fail_silently=False,
+        email = EmailMessage(
+            subject=subject,
+            body=message,
+            from_email='rshreyas508@gmail.com',
+            to=[self.email],
         )
+        email.send()
 
-    
 
     def __str__(self):
         return self.user_name

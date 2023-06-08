@@ -1,6 +1,3 @@
-from django.db import models
-
-# Create your models here.
 from decimal import Decimal
 from django.conf import settings
 from django.db import models
@@ -20,7 +17,7 @@ class Order(models.Model):
     updated = models.DateTimeField(auto_now=True)
     total_paid = models.DecimalField(max_digits=5, decimal_places=2)
     order_key = models.CharField(max_length=200)
-    billing_status = models.BooleanField(default=False)
+    billing_status = models.BooleanField(default=True)
 
     class Meta:
         ordering = ('-created',)

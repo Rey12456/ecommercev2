@@ -8,7 +8,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import TemplateView
 
 from basket.basket import Basket
-
 from orders.views import payment_confirmation
 
 
@@ -30,7 +29,7 @@ def BasketView(request):
     total = total.replace('.', '')
     total = int(total)
 
-    stripe.api_key = 'sk_test_51N8rW8FSp83ECesWtwWm6C3RtPflFKBEKeIbCcg7R2YR9ImpM0IYVuwRZdLfVoRpeBQq7ZrUJDQHPzJMitHOCalr00byoQKRb8'
+    stripe.api_key = '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'
     intent = stripe.PaymentIntent.create(
         amount=total,
         currency='usd',
@@ -38,6 +37,7 @@ def BasketView(request):
     )
 
     return render(request, 'payment/home.html', {'client_secret': intent.client_secret})
+
 
 @csrf_exempt
 def stripe_webhook(request):
@@ -60,5 +60,3 @@ def stripe_webhook(request):
         print('Unhandled event type {}'.format(event.type))
 
     return HttpResponse(status=200)
-
-
