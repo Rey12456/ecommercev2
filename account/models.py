@@ -69,7 +69,7 @@ class UserBase(AbstractBaseUser, PermissionsMixin):
         email = EmailMessage(
             subject=subject,
             body=message,
-            from_email='rshreyas508@gmail.com',
+            from_email='',
             to=[self.email],
         )
         email.send()
