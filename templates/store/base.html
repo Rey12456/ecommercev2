@@ -14,6 +14,7 @@
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
     </script>
     <link rel="stylesheet" href="{% static 'core/css/base.css' %}">
+    {% block stylesheet %}{% endblock %}
     <link rel="stylesheet" href="{% static 'basket/css/basket.css' %}">
 </head>
 
@@ -27,12 +28,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom">
             <div class="container-fluid px-md-4">
                 <div class="d-flex w-100 navbar-collapse">
-                    <a class="navbar-brand d-flex-inline" href="/">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor"
-                            class="bi bi-asterisk" viewBox="0 0 16 16">
-                            <path
-                                d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
-                        </svg>
+                    <a class="navbar-brand d-flex-inline" href="{% url "store:product_all" %}">
+                        <img src="/media/images/bottle.png" width="90" height="70" alt="Image Description" class="bi bi-asterisk">
+
                     </a>
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item dropdown">
@@ -40,10 +38,11 @@
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Products
                                 <i class="ps-1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
-                                    </svg></i>
+                                    fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                </svg></i>
+                                
                             </a>
                             <ul class="dropdown-menu rounded-0 border-0" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{% url "store:product_all" %}">All</a></li>
@@ -143,12 +142,13 @@
                         </ul>
                     </div>
                 </div>
-                <form class="d-flex w-100 d-md-none">
-                    <input class="form-control me-2" type="search" placeholder="Search products or FAQ"
-                        aria-label="Search">
-                    <button class="btn btn-outline-secondary" type="submit">Search</button>
-                </form>
+                
             </div>
+            <form action="{% url "store:search" %}" method="get" class="d-flex">
+                <input class="form-control me-2" type="search" name="query" placeholder="Search products or FAQ"
+                    aria-label="Search">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </form>
         </nav>
             
     
@@ -164,11 +164,8 @@
         <hr>
         <div class="row pt-4">
             <div class="col-12 col-md">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-asterisk" viewBox="0 0 16 16">
-                    <path
-                        d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
-                </svg>
+                <img src="/media/images/bottle.png" width="90" height="70" alt="Image Description" class="bi bi-asterisk">
+
                 <small class="d-block mb-3 text-muted">&copy; 2022-2023</small>
             </div>
 
@@ -179,10 +176,9 @@
             <div class="col-6 col-md">
                 <h5>About</h5>
                 <ul class="list-unstyled">
-                    <li><a class="link-secondary text-decoration-none" href="#">Team</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="https://www.linkedin.com/in/shreyas-reddy-220a34263/">Team</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="https://goo.gl/maps/J5pqUFsjtdS9sA1D7">Locations</a></li>
+                    
                 </ul>
             </div>
 
@@ -190,8 +186,6 @@
             <div class="col-6 col-md">
                 <h5>Services</h5>
                 <ul class="list-unstyled">
-                    <li><a class="link-secondary text-decoration-none" href="#">FAQs</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Shipping</a></li>
                     <li><a class="link-secondary text-decoration-none" href="#">Returns</a></li>
                     <li><a class="link-secondary text-decoration-none" href="#">Payment</a></li>
                 </ul>
@@ -202,8 +196,8 @@
                 <h5>Contact</h5>
                 <ul class="list-unstyled">
                     <li><a class="link-secondary text-decoration-none" href="#">Email</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Phone</a></li>
-                    <li><a class="link-secondary text-decoration-none" href="#">Address</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="https://goo.gl/maps/J5pqUFsjtdS9sA1D7">Phone</a></li>
+                    <li><a class="link-secondary text-decoration-none" href="https://goo.gl/maps/J5pqUFsjtdS9sA1D7">Address</a></li>
                 </ul>
             </div>
         </div>

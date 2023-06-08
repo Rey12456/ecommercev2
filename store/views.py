@@ -7,6 +7,9 @@ def product_all(request):
     products = Product.products.all()
     return render(request, 'store/home.html', {'products': products})
 
+def age(request):
+    return render(request,'store/ageReq.html')
+
 
 def category_list(request, category_slug=None):
     category = get_object_or_404(Category, slug=category_slug)
@@ -18,5 +21,17 @@ def product_detail(request, slug):
     product = get_object_or_404(Product, slug=slug, in_stock=True)
     return render(request, 'store/products/single.html', {'product': product})
 
-def coming_home(request):
-    return render(request, 'store/coming.html')
+def searchBar(request):
+    if request.method=='GET':
+        query=request.GET.get('query')
+        if query:
+            products=Product.objects.filter(name__icontains=query)
+            return render(request,'store/searchbar.html',{'products':products})
+        else:
+            print("No query found")
+            return render(request,'store/searchbar.html')
+
+
+
+def deny(request):
+    return render(request,'store/Deny.html')

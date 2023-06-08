@@ -58,6 +58,11 @@
                         class="text-muted">(Optional)</span></label>
                     <input type="text" class="form-control" id="custAdd2" placeholder="Apartment or suite">
                   </div>
+                  <div class="col-12">
+                    <label for="phonenumber" class="form-label">Phone Number <span
+                        class="text-muted"></span></label>
+                    <input type="text" class="form-control" id="phonenumber" placeholder="xxx-xxx-xxxx">
+                  </div>
                   <div class="col-md-5">
                     <label for="country" class="form-label">Country</label>
                     <select class="form-select" id="country" required>
@@ -72,7 +77,7 @@
                     <label for="state" class="form-label">State</label>
                     <select class="form-select" id="state" required>
                       <option value="">Choose...</option>
-                      <option>California</option>
+                      <option>Illinois</option>
                     </select>
                     <div class="invalid-feedback">
                       Please provide a valid state.
@@ -115,11 +120,13 @@
     var custNameInput = document.getElementById('custName');
     var custAddInput = document.getElementById('custAdd');
     var postCodeInput = document.getElementById("postCode");
+    var phonenumberInput = document.getElementById("phonenumber");
 
     // Store the customer name in a variable
     var custName = custNameInput.value;
     var custAdd = custAddInput.value;
     var postCode = postCodeInput.value;
+    var phonenumber = phonenumberInput.value;
 
     // Use the custName variable as needed
     console.log('Customer Name:', custName);
