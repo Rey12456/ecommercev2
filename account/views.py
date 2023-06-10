@@ -16,14 +16,18 @@ from .tokens import account_activation_token
 
 @login_required
 def dashboard(request):
+    """
+    View function for the user dashboard.
+    """
     orders = user_orders(request)
-    return render(request,
-                  'account/user/dashboard.html',
-                  {'section': 'profile', 'orders': orders})
+    return render(request, 'account/user/dashboard.html', {'section': 'profile', 'orders': orders})
 
 
 @login_required
 def edit_details(request):
+    """
+    View function for editing user details.
+    """
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user, data=request.POST)
 
@@ -32,12 +36,14 @@ def edit_details(request):
     else:
         user_form = UserEditForm(instance=request.user)
 
-    return render(request,
-                  'account/user/edit_details.html', {'user_form': user_form})
+    return render(request, 'account/user/edit_details.html', {'user_form': user_form})
 
 
 @login_required
 def delete_user(request):
+    """
+    View function for deleting a user account.
+    """
     user = UserBase.objects.get(user_name=request.user)
     user.is_active = False
     user.save()
@@ -46,7 +52,9 @@ def delete_user(request):
 
 
 def account_register(request):
-
+    """
+    View function for user registration.
+    """
     if request.user.is_authenticated:
         return redirect('account:dashboard')
 
@@ -74,6 +82,9 @@ def account_register(request):
 
 
 def account_activate(request, uidb64, token):
+    """
+    View function for activating a user account.
+    """
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = UserBase.objects.get(pk=uid)
