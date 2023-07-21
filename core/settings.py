@@ -115,7 +115,16 @@ LOGIN_URL = '/account/login/'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'rshreyas508@gmail.com'
+EMAIL_HOST_PASSWORD = 'iedkpjgaiqtdunwz'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = ''
+DEFAULT_FROM_EMAIL = 'rshreyas508@gmail.com'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True
+
+# Set the secure cookie settings
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
